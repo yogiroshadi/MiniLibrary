@@ -29,8 +29,11 @@ public class RestSecurityConfiguration {
         http.antMatcher("/api/**").csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/account/authenticate", "/api/customer/register").permitAll()
-                .antMatchers("/api/book", "/api/customer/update").hasAuthority("Customer")
-                .antMatchers("/api/book/**", "/api/category/**").hasAuthority("Admin")
+                .antMatchers("/api/book", "/api/customer/update",
+                        "/api/lent/insert"
+                        ).hasAuthority("Customer")
+                .antMatchers("/api/book/**", "/api/category/**",
+                        "/api/lent/updateStatus", "/api/role/all").hasAuthority("Admin")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic() //digunakan untuk membuat kodingan kita memiliki HttpBasic setting
